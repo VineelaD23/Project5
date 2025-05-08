@@ -1,0 +1,9 @@
+{
+	"name": "dvineelaadf",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "870639d6-5870-4392-9bc6-da8b7d1140f4",
+		"tenantId": "c4e7d4b4-dccc-493c-8464-2a0e178d6c0a"
+	}
+}
