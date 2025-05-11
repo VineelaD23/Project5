@@ -5,9 +5,9 @@
 		"typeProperties": {
 			"sources": [
 				{
-					"linkedService": {
-						"referenceName": "AzureSqlDatabase",
-						"type": "LinkedServiceReference"
+					"dataset": {
+						"referenceName": "AzureSqlTable2",
+						"type": "DatasetReference"
 					},
 					"name": "source1"
 				}
@@ -35,11 +35,8 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     format: 'table',",
-				"     store: 'sqlserver',",
-				"     schemaName: 'dbo',",
-				"     tableName: 'Customers',",
-				"     isolationLevel: 'READ_UNCOMMITTED') ~> source1",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source1",
 				"source1 filter(!isNull(CustomerID)) ~> filter1",
 				"filter1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
