@@ -1,0 +1,147 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "dvineelaadf"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+		},
+		"synapsevineelad-WorkspaceDefaultSqlServer_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'synapsevineelad-WorkspaceDefaultSqlServer'",
+			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:synapsevineelad.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsgen2accountvd.dfs.core.windows.net/"
+		},
+		"AzureKeyVault_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://kv-dvineela.vault.azure.net/"
+		},
+		"AzureSqlDatabase_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "vineeladandu.database.windows.net"
+		},
+		"AzureSqlDatabase_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "vineelad"
+		},
+		"AzureSqlDatabase_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "admin123"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "vineeladandu.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "vineelad"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "admin123"
+		},
+		"kv_sqldatabasepassword_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://kv-dvineela.vault.azure.net/"
+		},
+		"synapsevineelad-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsgen2accountvd.dfs.core.windows.net"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "dvineelaadf_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureDataLakeStorage1_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+					},
+					"synapsevineelad-WorkspaceDefaultSqlServer_connectionString": {
+						"value": "[parameters('synapsevineelad-WorkspaceDefaultSqlServer_connectionString')]"
+					},
+					"AzureDataLakeStorage1_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					},
+					"AzureKeyVault_properties_typeProperties_baseUrl": {
+						"value": "[parameters('AzureKeyVault_properties_typeProperties_baseUrl')]"
+					},
+					"kv_sqldatabasepassword_properties_typeProperties_baseUrl": {
+						"value": "[parameters('kv_sqldatabasepassword_properties_typeProperties_baseUrl')]"
+					},
+					"AzureSqlDatabase_properties_typeProperties_server": {
+						"value": "[parameters('AzureSqlDatabase_properties_typeProperties_server')]"
+					},
+					"AzureSqlDatabase_properties_typeProperties_database": {
+						"value": "[parameters('AzureSqlDatabase_properties_typeProperties_database')]"
+					},
+					"AzureSqlDatabase_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSqlDatabase_properties_typeProperties_userName')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_server": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_server')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_database": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_database')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_userName')]"
+					},
+					"synapsevineelad-WorkspaceDefaultStorage_properties_typeProperties_url": {
+						"value": "[parameters('synapsevineelad-WorkspaceDefaultStorage_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "dvineelaadf_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'dvineelaadf_ArmTemplate_0')]"
+			]
+		}
+	]
+}
